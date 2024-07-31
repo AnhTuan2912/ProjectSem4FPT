@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoMo Payment</title>
+</head>
+<body>
+    <h1>Create MoMo Order</h1>
+    <form id="paymentForm">
+        <label for="orderId">Order ID:</label>
+        <input type="text" id="orderId" name="orderId" required><br><br>
+        
+        <label for="requestId">Request ID:</label>
+        <input type="text" id="requestId" name="requestId" required><br><br>
+        
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" required><br><br>
+        
+        <label for="orderInfo">Order Info:</label>
+        <input type="text" id="orderInfo" name="orderInfo" required><br><br>
+        
+        <label for="returnUrl">Return URL:</label>
+        <input type="text" id="returnUrl" name="returnUrl" required><br><br>
+        
+        <label for="notifyUrl">Notify URL:</label>
+        <input type="text" id="notifyUrl" name="notifyUrl" required><br><br>
+        
+        <label for="extraData">Extra Data:</label>
+        <input type="text" id="extraData" name="extraData"><br><br>
+        
+        <label for="requestType">Request Type:</label>
+        <input type="text" id="requestType" name="requestType" required><br><br>
+        
+        <label for="autoCapture">Auto Capture:</label>
+        <input type="checkbox" id="autoCapture" name="autoCapture"><br><br>
+        
+        <button type="button" onclick="createOrder()">Create Order</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+        function createOrder() {
+            const form = document.getElementById('paymentForm');
+            const formData = new FormData(form);
+            const params = new URLSearchParams(formData);
+
+            fetch('/createOrder?' + params.toString(), {
+                method: 'GET',
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

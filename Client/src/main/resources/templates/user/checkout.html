@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Check Out</title>
+
+        <!-- font awesome cdn link  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="css/cssCheckout.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/flaticon.css">
+        <link rel="stylesheet" href="css/slicknav.css">
+        <link rel="stylesheet" href="css/animate.min.css">
+        <link rel="stylesheet" href="css/magnific-popup.css">
+        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/themify-icons.css">
+        <link rel="stylesheet" href="css/slick.css">
+        <link rel="stylesheet" href="css/nice-select.css">
+        <!-- custom js file link  -->
+        <script src="js/script.js" defer></script>
+            <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+
+    </head>
+    <body>
+
+        <!-- header section starts  -->
+
+        <div th:replace="~{/user/fragments :: menu}"></div>
+
+        <!-- header section ends -->
+
+        <!-- header section  -->
+
+        <section class="heading">
+            <h1>shopping cart</h1>
+            <p> <a th:href="@{/user/index}">Home</a> >> Check Out </p>
+        </section>
+
+        <!-- header section -->
+
+        <!-- cart section starts  -->
+
+        <section class="checkout_area section_padding">
+            <div class="container">
+                <div class="returning_customer">
+                    <div class="check_title">
+                        <h2 th:if="${session.user} == null">
+                            Returning Customer?
+                            <a th:href="@{/user/login}">Click here to login</a>
+                        </h2>
+                    </div>
+                </div>
+                <form th:action="@{/user/checkout}" method="post" th:object="${orders}" id="form-1">
+                    <div class="billing_details">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h3>Billing Details</h3>
+                                <input type="text" th:field="*{userId}"/>
+                                <div class="row contact_form" >
+                                    <div class="col-md-12 form-group">
+                                        <input type="text" class="form-control" id="name"   th:field="*{name}" placeholder="Full name" />
+                                        <span style="color: red" class="form-message"></span>
+                                    </div>
+                                    <div class="col-md-6 form-group p_star">
+                                        <input type="text" class="form-control" id="phone" name="number" th:field="*{phone}" placeholder="Phone" />
+                                        <span style="color: red" class="form-message"></span>
+                                    </div>
+                                    <div class="col-md-6 form-group p_star">
+                                        <input type="text" class="form-control" id="email" name="compemailany" th:field="*{email}" placeholder="Email" />
+                                        <span style="color: red" class="form-message"></span>
+
+                                    </div>
+                                    <div class="col-md-12 form-group p_star">
+                                        <input type="text" class="form-control" id="address" name="add1" th:field="*{address}" placeholder="Address"/>
+                                        <span style="color: red" class="form-message"></span>
+                                    </div>
+                                    <div class="col-md-12 form-group p_star">
+                                        <select class="country_select form-control country" th:field="*{country}" onchange="loadStates()">
+                                            <option value="" disabled selected>Select Country</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 form-group p_star">
+                                        <select class="country_select form-control state" th:field="*{state}" onchange="loadCities()">
+                                            <option value="" disabled selected>Select State</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 form-group p_star">
+                                        <select class="country_select form-control city" th:field="*{city}">
+                                            <option value="" disabled selected>Select City</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <input type="text" class="form-control" id="zip" name="zip" th:field="*{postcode}" placeholder="Postcode/ZIP" />
+                                        <span style="color: red" class="form-message"></span>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <h3>Shipping Details</h3>
+                                        <textarea class="form-control" name="message" id="editor" rows="1" th:field="*{note}" placeholder="Order Notes"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="order_box">
+                                    <h2>Your Order</h2>
+                                    <ul class="list" >
+                                        <li>
+                                            <a href="#">Product
+                                                <span>Total</span>
+                                            </a>
+                                        </li>
+                                        <li th:each="b:${session.Cart}" th:if="session.Cart != null">
+                                            <a>
+                                                <span style="float: left;" th:text="${b.value.product.name}"></span>
+                                                <span class="middle" th:text="${'x' + b.value.quantity}"></span>
+                                                <span class="last" th:text="'$' + ${b.value.totalPrice}"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <ul class="list list_2">
+                                        <li>
+                                            <a href="#">Total
+                                                <span th:field="*{totalPrice}" name="price" th:text="'$' + ${session.TotalPriceCart}"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <input type="text" placeholder="Enter coupon code" /> <button class="tp_btn">Apply</button>
+                                    <div class="payment_item">
+                                        <div class="radion_btn">
+                                            <input type="radio" id="f-option5" th:field="*{paymentMethod}" name="paymentMethod" value="PayPal"/>
+                                            <img src="images/Paypal_logo.png" width="15%"  alt="" />
+                                            <label for="f-option5">Paypal</label>
+                                            <div class="check"></div>
+                                        </div>
+                                    </div>
+                                    <div class="payment_item">
+                                        <div class="radion_btn">
+                                            <input type="radio" id="f-option7" th:field="*{paymentMethod}" name="paymentMethod" value="MoMo" />
+                                            <img src="images/MoMo_Logo.png" width="15%"  alt="" />
+                                            <label for="f-option7">MoMo </label>
+                                            <div class="check"></div>
+                                        </div>
+                                    </div>
+                                    <div class="creat_account">
+                                        <input type="checkbox" id="f-option4" name="selector" />
+                                        <label for="f-option4">I’ve read and accept the </label>
+                                        <a href="#">terms & conditions*</a>
+                                    </div>
+                                    <input type="submit" class="btn_3" value="Proceed to Paypal"/>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- cart section end -->
+
+        <!-- footer section starts  -->
+
+        <section class="footer">
+            <div class="credit"><span></span></div>
+            <div class="box-container">
+                <div class="box">
+                    <h3>quick links</h3>
+                    <a href="home.html"> <i class="fas fa-angle-right"></i> home</a>
+                    <a href="products.html"> <i class="fas fa-angle-right"></i> products</a>
+                    <a href="about.html"> <i class="fas fa-angle-right"></i> about</a>
+                    <a href="blogs.html"> <i class="fas fa-angle-right"></i> blogs</a>
+                    <a href="contact.html"> <i class="fas fa-angle-right"></i> contact</a>
+                    <a href="login.html"> <i class="fas fa-angle-right"></i> login</a>
+                    <a href="register.html"> <i class="fas fa-angle-right"></i> register</a>
+                    <a href="cart.html"> <i class="fas fa-angle-right"></i> cart</a>
+                </div>
+                <div class="box">
+                    <h3>extra links</h3>
+                    <a href="#"> <i class="fas fa-angle-right"></i> my account </a>
+                    <a href="#"> <i class="fas fa-angle-right"></i> my order </a>
+                    <a href="#"> <i class="fas fa-angle-right"></i> my wishlist </a>
+                    <a href="#"> <i class="fas fa-angle-right"></i> terms of use </a>
+                    <a href="#"> < i class="fas fa-angle-right"></i> privacy policy </a>
+                </div>
+                <div class="box">
+                    <h3>follow us</h3>
+                    <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+                    <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+                    <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+                    <a href="#"> <i class="fab fa-pinterest"></i> pinterest </a>
+                    <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+                    <a href="#"> <i class="fab fa-github"></i> github </a>
+                </div>
+                <div class="box">
+                    <h3>newsletter</h3>
+                    <p>subscribe for latest updates</p>
+                    <form action="">
+                        <input type="email" placeholder="enter your email">
+                        <input type="submit" value="subscribe" class="btn">
+                    </form>
+                </div>
+            </div>
+        </section>
+        <script src="/static/admin/js/validator.js"></script>
+        <!-- footer section ends -->
+<script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+        <script>
+                                            Validator({
+                                                form: '#form-1',
+                                                errorSelector: '.form-message',
+                                                rules: [
+                                                    Validator.isRequired('#name'),
+                                                    Validator.isRequired('#phone'),
+                                                    Validator.isRequired('#email'),
+                                                    Validator.isRequired('#address'),
+                                                    Validator.isRequired('#zip')
+
+                                                ]
+                                            });
+        </script>
+
+        <script>
+            var config = {
+                cUrl: 'https://api.countrystatecity.in/v1/countries',
+                ckey: 'NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA=='
+            }
+
+            var countrySelect = document.querySelector('.country'),
+                    stateSelect = document.querySelector('.state'),
+                    citySelect = document.querySelector('.city')
+
+            function loadCountries() {
+                let apiEndPoint = config.cUrl
+                fetch(apiEndPoint, {headers: {"X-CSCAPI-KEY": config.ckey}})
+                        .then(Response => Response.json())
+                        .then(data => {
+                            data.forEach(country => {
+                                const option = document.createElement('option')
+                                option.value = country.iso2
+                                option.textContent = country.name
+                                countrySelect.appendChild(option)
+                            })
+                        })
+                        .catch(error => console.error('Error loading countries:', error))
+
+                stateSelect.disabled = true
+                citySelect.disabled = true
+                stateSelect.style.pointerEvents = 'none'
+                citySelect.style.pointerEvents = 'none'
+            }
+
+            function loadStates() {
+                stateSelect.disabled = false
+                citySelect.disabled = true
+                stateSelect.style.pointerEvents = 'auto'
+                citySelect.style.pointerEvents = 'none'
+
+                const selectedCountryCode = countrySelect.value
+                stateSelect.innerHTML = '<option value="">Select State</option>'
+                citySelect.innerHTML = '<option value="">Select City</option>'
+
+                fetch(`${config.cUrl}/${selectedCountryCode}/states`, {headers: {"X-CSCAPI-KEY": config.ckey}})
+                        .then(response => response.json())
+                        .then(data => {
+                            data.forEach(state => {
+                                const option = document.createElement('option')
+                                option.value = state.iso2
+                                option.textContent = state.name
+                                stateSelect.appendChild(option)
+                            })
+                        })
+                        .catch(error => console.error('Error loading states:', error))
+            }
+
+            function loadCities() {
+                citySelect.disabled = false
+                citySelect.style.pointerEvents = 'auto'
+
+                const selectedCountryCode = countrySelect.value
+                const selectedStateCode = stateSelect.value
+
+                citySelect.innerHTML = '<option value="">Select City</option>'
+
+                fetch(`${config.cUrl}/${selectedCountryCode}/states/${selectedStateCode}/cities`, {headers: {"X-CSCAPI-KEY": config.ckey}})
+                        .then(response => response.json())
+                        .then(data => {
+                            data.forEach(city => {
+                                const option = document.createElement('option')
+                                option.value = city.name
+                                option.textContent = city.name
+                                citySelect.appendChild(option)
+                            })
+                        })
+                        .catch(error => console.error('Error loading cities:', error))
+            }
+
+            window.onload = loadCountries
+        </script>
+
+    </body>
+</html>

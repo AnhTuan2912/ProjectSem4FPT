@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+    <head>
+        <meta charset="utf-8">
+        <title>DASHMIN - Bootstrap Admin Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+        <style>
+            .invalid{
+                color: red;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container-xxl position-relative bg-white d-flex p-0">
+            <!-- Spinner Start -->
+            <div th:replace="~{/admin/fragments :: spinner}"></div>
+
+            <!-- Spinner End -->
+
+
+            <!-- Sidebar Start -->
+            <div th:replace="~{/admin/fragments :: sidebar}"></div>
+            <!-- Sidebar End -->
+
+
+            <!-- Content Start -->
+            <div class="content">
+                <!-- Navbar Start -->
+                <span th:replace="~{/admin/fragments :: navc}"></span>
+
+                <!-- Navbar End -->
+
+
+                <!-- Form Start -->
+                <div class="container-fluid pt-4 px-4">
+                    <form th:action="@{/admin/productC}" method="post" enctype="multipart/form-data" th:object="${pro}" id="form-1">
+                        <div class="row g-4">
+                            <div class="col-sm-12 col-xl-6">
+                                <div class="bg-light rounded h-100 p-4">
+                                    <h6 class="mb-4">Create new Product</h6>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="name"
+                                               placeholder="name@example.com" th:field="*{name}">
+                                        <label for="floatingInput">Product Name</label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="code" placeholder="" th:field="*{code}">
+                                        <label for="floatingInput">Product Code</label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="gfm"
+                                               placeholder="name@example.com" th:field="*{gfm}">
+                                        <label for="floatingInput">Glass Frame Material</label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="lt"
+                                               placeholder="name@example.com" th:field="*{lt}">
+                                        <label for="floatingInput">Lens Technology</label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="gs"
+                                               placeholder="name@example.com" th:field="*{gs}">
+                                        <label for="floatingInput">Glass Style</label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="sft"
+                                               placeholder="name@example.com" th:field="*{sft}">
+                                        <label for="floatingInput">
+                                            Suitable Face Type</label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="lw"
+                                               placeholder="name@example.com" th:field="*{lw}">
+                                        <label for="floatingInput">
+                                            Lens Width</label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="cd"
+                                               placeholder="name@example.com" th:field="*{cd}">
+                                        <label for="floatingInput">Circle Distance
+                                        </label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="fl"
+                                               placeholder="name@example.com" th:field="*{fl}">
+                                        <label for="floatingInput" >
+                                            Frame Length</label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="floatingSelect" th:field="*{typeId}"
+                                                aria-label="Floating label select example">
+
+                                            <option th:each="type : ${type}" th:value="${type.id}" th:text="${type.name}">Type</option>
+                                        </select>
+                                        <label for="floatingSelect">Product type</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="floatingSelect" th:field="*{categoryId}"
+                                                aria-label="Floating label select example">
+
+                                            <option th:each="category : ${cate}" th:value="${category.id}" th:text="${category.name}">Brand</option>
+                                        </select>
+                                        <label for="floatingSelect">Brand</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="price"
+                                               placeholder="name@example.com" th:field="*{price}">
+                                        <label for="floatingInput">Price</label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="quantity"
+                                               placeholder="name@example.com" th:field="*{quantity}">
+                                        <label for="floatingInput">Quantity</label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="discount"
+                                               placeholder="name@example.com" th:field="*{discount}">
+                                        <label for="floatingInput">Discount</label>
+                                        <span class="form-message"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-xl-6">
+                                <div class="bg-light rounded h-100 p-4">
+                                    <h6 class="mb-4">File Input</h6>
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Thumbnail Images</label>
+                                        <input class="form-control" type="file" id="image" th:field="*{image}">
+                                        <span class="form-message"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Extra Image 1</label>
+                                        <input class="form-control" type="file" id="extraImage1" th:field="*{extraImage1}">
+                                        <span class="form-message"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Extra Image 2</label>
+                                        <input class="form-control" type="file" id="extraImage2" th:field="*{extraImage2}">
+                                        <span class="form-message"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Extra Image 3</label>
+                                        <input class="form-control" type="file" id="extraImage3" th:field="*{extraImage3}">
+                                        <span class="form-message"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-floating mb-3">
+                                <input type="submit" value="Create" class="btn btn-primary" style="padding: 0.375rem 29.55rem;">
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <!-- Form End -->
+
+
+                <!-- Footer Start -->
+                <div class="container-fluid pt-4 px-4">
+                    <div class="bg-light rounded-top p-4">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 text-center text-sm-start">
+                                &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                            </div>
+                            <div class="col-12 col-sm-6 text-center text-sm-end">
+                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer End -->
+            </div>
+            <!-- Content End -->
+
+
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        </div>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/chart/chart.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+        <script src="js/validator.js"></script>
+        <script>
+            Validator({
+                form: '#form-1',
+                errorSelector: '.form-message',
+                rules: [
+                    Validator.isRequired('#name'),
+                    Validator.isRequired('#code'),
+                    Validator.isRequired('#gfm'),
+                    Validator.isRequired('#lt'),
+                    Validator.isRequired('#gs'),
+                    Validator.isRequired('#sft'),
+                    Validator.isRequired('#lw'),
+                    Validator.isRequired('#cd'),
+                    Validator.isRequired('#fl'),
+                    Validator.isRequired('#price'),
+                    Validator.positiveNumber('#price'),
+                    Validator.isRequired('#quantity'),
+                    Validator.positiveNumber('#quantity'),
+                    Validator.isRequired('#discount'),
+                    Validator.positiveNumber('#discount'),
+                    Validator.isRequired('#image'),
+                    Validator.isRequired('#extraImage1'),
+                    Validator.isRequired('#extraImage2'),
+                    Validator.isRequired('#extraImage3'),
+                ]
+            });
+        </script>
+    </body>
+
+</html>

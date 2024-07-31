@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>DASHMIN - Bootstrap Admin Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+        <style type="text/css">
+            body {
+                background: #eee;
+                font-size: 1.7rem;
+            }
+            .dropdown-menu{
+                font-size: 1.7rem;
+            }
+
+            #page-wrapper {
+                padding: 15px 25px;
+            }
+            .mx-4 {
+                margin-right: 5.5rem !important;
+            }
+            .mb-3 {
+                margin-bottom: 5rem !important;
+            }
+            .sidebar{
+                width: 295px;
+            }
+            .pe-4 {
+                padding-right: 5.5rem !important;
+            }
+            .form-control{
+                font-size: 1.8rem;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="container-xxl position-relative bg-white d-flex p-0">
+            <!-- Spinner Start -->
+            <div th:replace="~{/admin/fragments :: spinner}"></div>
+
+            <!-- Spinner End -->
+
+            <!-- Sidebar Start -->
+            <div th:fragment="sidebar">
+                <div class="sidebar pe-4 pb-3">
+                    <nav class="navbar bg-light navbar-light">
+                        <a th:href="@{/admin/dashboard}" class="navbar-brand mx-4 mb-3">
+                            <h3 style="font-size: 2.85rem" class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                        </a>
+                        <div class="d-flex align-items-center ms-4 mb-4">
+                            <div class="position-relative">
+                                <img class="rounded-circle" src="/static/admin/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                            </div>
+                            <div class="ms-3" th:if="${session.user != null}">
+                                <h6 style="font-size: 1.65rem" class="mb-0" th:text="${session.user.name}"></h6>
+                                <span th:text="${session.user.roleId.name}"></span>
+                            </div>
+                        </div>
+                        <div class="navbar-nav w-100">
+                            <a th:href="@{/admin/dashboard}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-edit"></i>Manager</a>
+                                <div class="dropdown-menu bg-transparent border-0">
+                                    <a th:href="@{/admin/staff}" class="dropdown-item">Staff Manager</a>
+                                    <a th:href="@{/admin/customer}" class="dropdown-item">Customer Manager</a>
+                                    <a th:href="@{/admin/categories}" class="dropdown-item">Brand Manager</a>
+                                    <a th:href="@{/admin/types}" class="dropdown-item">Type Manager</a>
+                                    <a th:href="@{/admin/products}" class="dropdown-item">Product Manager</a>
+                                </div>
+                            </div>
+
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Order Manager</a>
+                                <div class="dropdown-menu bg-transparent border-0">
+                                    <a th:href="@{/admin/orders}" class="dropdown-item">Orders</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Sidebar End -->
+
+
+            <!-- Content Start -->
+            <div class="content">
+                <!-- Navbar Start -->
+                <span th:replace="~{/admin/fragments :: navc}"></span>
+                <!-- Navbar End -->
+
+
+                <!-- Table Start -->
+                <div class="container-fluid pt-4 px-4">
+                    <div class="row g-4">
+
+
+
+                        <div id="page-wrapper" class="container">
+                            <div id="monthly-sales-data" th:text="${monthlySalesJson}" style="display: none;"></div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h1>Dashboard <small>Statistics Overview</small></h1>
+
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <i class="fa fa-users fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-6 text-right">
+                                                    <p class="announcement-heading" th:text="${usersCount}"></p>
+                                                    <p class="announcement-text">Users</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#">
+                                            <div class="panel-footer announcement-bottom">
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        View
+                                                    </div>
+                                                    <div class="col-xs-6 text-right">
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <i style="font-size: 8rem;" class="fas fa-dolly-flatbed"></i>
+
+                                                </div>
+                                                <div class="col-xs-6 text-right">
+                                                    <p class="announcement-heading" th:text="${productCount}"></p>
+                                                    <p class="announcement-text">Product Quantity</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#">
+                                            <div class="panel-footer announcement-bottom">
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        View
+                                                    </div>
+                                                    <div class="col-xs-6 text-right">
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <i style="font-size: 8rem;" class="fa fa-eye" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-xs-6 text-right">
+                                                    <p class="announcement-heading" th:text="${visitCount}"></p>
+                                                    <p class="announcement-text">VisitCount</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#">
+                                            <div class="panel-footer announcement-bottom">
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        View
+                                                    </div>
+                                                    <div class="col-xs-6 text-right">
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <i class="fa fa-shopping-cart" style="font-size: 8rem;" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-xs-6 text-right">
+                                                    <p class="announcement-heading" th:text="${ordersCount}"></p>
+                                                    <p class="announcement-text">Total Orders!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#">
+                                            <div class="panel-footer announcement-bottom">
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        View
+                                                    </div>
+                                                    <div class="col-xs-6 text-right">
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="container-fluid pt-4 px-4">
+                                    <div class="row g-4" >
+
+                                        <div class="col-sm-12 col-xl-6" style="width: 100%;">
+                                            <div class="bg-light text-center rounded p-4">
+                                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                                    <h6 class="mb-0">Orders</h6>
+                                                    <a href="">Show All</a>
+                                                </div>
+                                                <canvas id="sales-revenue"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Table End -->
+
+
+                        <!-- Footer Start -->
+                        <div class="container-fluid pt-4 px-4">
+                            <div class="bg-light rounded-top p-4">
+                                <div class="row">
+                                    <div class="col-12 col-sm-6 text-center text-sm-start">
+                                        &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                    </div>
+                                    <div class="col-12 col-sm-6 text-center text-sm-end">
+                                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                                        Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Footer End -->
+                    </div>
+                    <!-- Content End -->
+
+
+                    <!-- Back to Top -->
+                    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+                </div>
+
+                <!-- JavaScript Libraries -->
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="lib/chart/chart.min.js"></script>
+                <script src="lib/easing/easing.min.js"></script>
+                <script src="lib/waypoints/waypoints.min.js"></script>
+                <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+                <script src="lib/tempusdominus/js/moment.min.js"></script>
+                <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+                <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+                <!-- Template Javascript -->
+                <script src="js/main.js"></script>
+                <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+                <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+                <script type="text/javascript"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        // Lấy dữ liệu từ thẻ ẩn chứa dữ liệu monthlySales
+                        var monthlySalesElement = document.getElementById('monthly-sales-data');
+                        var monthlySalesData = monthlySalesElement.textContent;
+
+                        try {
+                            var monthlySales = JSON.parse(monthlySalesData);
+                        } catch (e) {
+                            console.error("Failed to parse monthlySales:", e);
+                            return;
+                        }
+
+                        if (!Array.isArray(monthlySales)) {
+                            console.error("monthlySales is not an array:", monthlySales);
+                            return;
+                        }
+
+                        var labels = monthlySales.map(sale => sale.month);
+                        var data = monthlySales.map(sale => sale.total);
+
+                        var ctx = document.getElementById('sales-revenue').getContext('2d');
+                        var salesChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                        label: 'Sales Revenue',
+                                        data: data,
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        borderWidth: 1
+                                    }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    });
+                </script>
+                </body>
+
+                </html>

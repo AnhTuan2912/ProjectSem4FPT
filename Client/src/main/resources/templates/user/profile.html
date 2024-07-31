@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+
+        <title>User Profile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <style type="text/css">
+            body {
+                margin-top: 20px;
+                background-color: #f2f6fc;
+                color: #69707a;
+            }
+
+            .img-account-profile {
+                height: 10rem;
+            }
+
+            .rounded-circle {
+                border-radius: 50% !important;
+            }
+
+            .card {
+                box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+            }
+
+            .card .card-header {
+                font-weight: 500;
+            }
+
+            .card-header:first-child {
+                border-radius: 0.35rem 0.35rem 0 0;
+            }
+
+            .card-header {
+                padding: 1rem 1.35rem;
+                margin-bottom: 0;
+                background-color: rgba(33, 40, 50, 0.03);
+                border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+            }
+
+            .form-control,
+            .dataTable-input {
+                display: block;
+                width: 100%;
+                padding: 0.875rem 1.125rem;
+                font-size: 0.875rem;
+                font-weight: 400;
+                line-height: 1;
+                color: #69707a;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #c5ccd6;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                border-radius: 0.35rem;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+
+            .nav-borders .nav-link.active {
+                color: #0061f2;
+                border-bottom-color: #0061f2;
+            }
+
+            .nav-borders .nav-link {
+                color: #69707a;
+                border-bottom-width: 0.125rem;
+                border-bottom-style: solid;
+                border-bottom-color: transparent;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+        </style>
+        <link rel="stylesheet" href="ncss/style.css">
+    </head>
+
+    <body>
+        <div th:replace="~{/user/fragments :: menu}"></div>
+        <section class="heading">
+            <h1>account</h1>
+            <p> <a th:href="@{/user/index}">home</a> >> Profile </p>
+        </section>
+        <div class="container-xl px-4 mt-4">
+
+            <nav class="nav nav-borders">
+                <a style="font-size: 1.9rem;" class="nav-link active ms-0"
+                   th:href="@{/user/profile}"
+                   >Profile</a>
+                <a  style="font-size: 1.9rem;" class="nav-link" th:href="@{/user/security}"
+                    >Security</a>
+                <a  style="font-size: 1.9rem;" class="nav-link " th:href="@{/user/order-history}"
+                    >OrderHistory</a>
+            </nav>
+            <hr class="mt-0 mb-4">
+            <form th:action="@{/user/editProfile}" th:object="${user}" method="post" enctype="multipart/form-data">
+                <div class="row">
+
+                    <div class="col-xl-4">
+
+                        <div class="card mb-4 mb-xl-0">
+                            <div style="font-size: 1.65rem;" class="card-header">Profile Picture</div>
+                            <div class="card-body text-center">
+
+                                <img class="img-account-profile rounded-circle mb-2" 
+                                     th:src="${user.avatar != null ? '/admin/images/' + user.avatar : 'http://bootdey.com/img/Content/avatar/avatar1.png'}" 
+                                     alt="User Avatar">
+
+                                <div style="font-size: 1.4rem;" class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+
+                                <input class="btn btn-primary" type="file"  th:field="*{avatar}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8">
+
+                        <div class="card mb-4">
+                            <div style="font-size: 1.65rem;" class="card-header">Account Details</div>
+
+
+                            <div class="card-body">
+
+                                <div class="alert alert-info text-center" th:if="${message}" th:text="${message}"></div>
+                                <div class="mb-3">
+                                    <input type="text" hidden th:field="*{id}"
+                                           <label style="font-size: 1.65rem;" class="small mb-1" for="inputUsername">Username (how
+                                        your name will appear to other users on the site)</label>
+                                    <input style="font-size: 1.4rem;" class="form-control" id="inputUsername" type="text"
+                                           placeholder="Enter your username" th:field="*{name}">
+                                </div>
+
+                                <div class="row gx-3 mb-3">
+
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" style="font-size: 1.65rem;" for="inputFirstName">Email </label>
+                                        <input readonly style="font-size: 1.4rem;" class="form-control" id="inputFirstName"type="email" placeholder="Enter your Email" th:field="*{email}" >
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label style="font-size: 1.65rem;" class="small mb-1" for="inputLastName">Phone</label>
+                                        <input style="font-size: 1.4rem;" class="form-control" id="inputLastName" type="text" placeholder="Enter your Phone" th:field="*{phone}" >
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+
+                                    <div class="mb-3">
+                                        <label style="font-size: 1.65rem;" class="small mb-1" for="inputEmailAddress">Address</label>
+                                        <input style="font-size: 1.4rem;" class="form-control" id="inputEmailAddress" type="text" placeholder="Enter your address" th:field="*{address}">
+                                    </div>
+                                </div>
+                                <input type="submit" value="Save Changes" class="btn btn-primary"/>
+                            </div>                    
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <section class="footer">
+            <div class="credit"><span></span></div>
+            <div class="box-container">
+
+                <div class="box">
+                    <h3>quick links</h3>
+                    <a href="home.html"> <i class="fas fa-angle-right"></i> home</a>
+                    <a href="products.html"> <i class="fas fa-angle-right"></i> products</a>
+                    <a href="about.html"> <i class="fas fa-angle-right"></i> about</a>
+                    <a href="blogs.html"> <i class="fas fa-angle-right"></i> blogs</a>
+                    <a href="contact.html"> <i class="fas fa-angle-right"></i> contact</a>
+                    <a href="login.html"> <i class="fas fa-angle-right"></i> login</a>
+                    <a href="register.html"> <i class="fas fa-angle-right"></i> register</a>
+                    <a href="cart.html"> <i class="fas fa-angle-right"></i> cart</a>
+                </div>
+
+                <div class="box">
+                    <h3>extra links</h3>
+                    <a href="#"> <i class="fas fa-angle-right"></i> my account </a>
+                    <a href="#"> <i class="fas fa-angle-right"></i> my order </a>
+                    <a href="#"> <i class="fas fa-angle-right"></i> my wishlist </a>
+                    <a href="#"> <i class="fas fa-angle-right"></i> terms of use </a>
+                    <a href="#"> <i class="fas fa-angle-right"></i> privacy policy </a>
+                </div>
+
+                <div class="box">
+                    <h3>follow us</h3>
+                    <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+                    <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+                    <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+                    <a href="#"> <i class="fab fa-pinterest"></i> pinterest </a>
+                    <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+                    <a href="#"> <i class="fab fa-github"></i> github </a>
+                </div>
+
+                <div class="box">
+                    <h3>newsletter</h3>
+                    <p>subscribe for latest updates</p>
+                    <form action="">
+                        <input type="email" placeholder="enter your emal">
+                        <input type="submit" value="subscribe" class="btn">
+                    </form>
+                </div>
+
+            </div>
+
+
+
+        </section>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript">
+
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div th:fragment="menu">
+            <header class="header">
+
+                <a th:href="@{/user/index}" class="logo"> Hin Fashion </a>
+
+                <nav class="navbar">
+                    <ul>
+                        <li><a th:href="@{/user/index}">home</a></li>
+                        <li><a th:href="@{/user/products}">products</a></li>
+                        <li><a href="#">pages +</a>
+                            <ul>
+                                <li><a th:href="@{/user/about}">about</a></li>
+                                <li><a th:href="@{/user/blogs}">blogs</a></li>
+                            </ul>
+                        </li>
+                        <li><a th:href="@{/user/contact}">contact</a></li>
+                        <li><a th:if="${session.user} == null" href="#">account +</a>
+                            <ul>
+                                <!-- Kiểm tra nếu session không có thuộc tính 'user' -->
+                                <li th:if="${session.user} == null">
+                                    <a th:href="@{/user/login}">login</a>
+                                </li>
+                                <li th:if="${session.user} == null">
+                                    <a th:href="@{/user/register}">register</a>
+                                </li>
+
+
+
+                            </ul>
+                        </li>
+                        <li th:if="${session.user != null}"><a  th:text="${session.user.name}" href="#"></a>
+
+                            <ul>
+                                <!-- Kiểm tra nếu session không có thuộc tính 'user' -->
+
+                                <!-- Kiểm tra nếu session có thuộc tính 'user' -->
+
+                                <li th:if="${session.user} != null">
+                                    <a th:href="@{/user/profile}">Settings</a>
+                                </li>
+                                <li th:if="${session.user} != null">
+                                    <a th:href="@{/user/logout}">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="icons">
+                    <div id="menu-btn" class="fas fa-bars"></div>
+                    <div id="search-btn" class="fas fa-search"></div>
+                    <a th:href="@{/user/cart}" class="fas fa-shopping-cart" id="totalQuantityCart" th:text="${TotalQuantityCart}"></a>
+<!--                     <a th:href="@{/user/cart}" class="fas fa-shopping-cart" th:if="${session.Cart == null}"></a>-->
+<!--                    <a th:href="@{/user/cart}" class="fas fa-shopping-cart" th:if="${session.Cart != null}" th:text="${session.Cart.size()}"></a>-->
+                </div>
+
+                <form action="" class="search-form">
+                    <input type="search" name="" placeholder="search here..." id="search-box">
+                    <label for="search-box" class="fas fa-search"></label>
+                </form>
+
+            </header>
+        </div>
+    </body>
+   
+
+    
+</html>

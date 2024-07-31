@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Products</title>
+
+        <!-- font awesome cdn link  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <!-- custom css file link  -->
+        <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <link href="css/login_overlay.css" rel='stylesheet' type='text/css' />
+        <link href="css/style6.css" rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="css/shop.css" type="text/css" />
+        <link rel="stylesheet" href="css/owl.carousel.css" type="text/css" media="all">
+        <link rel="stylesheet" href="css/owl.theme.css" type="text/css" media="all">
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui1.css">
+        <link href="css/style.css" rel='stylesheet' type='text/css' />
+        <link href="//fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
+              rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/shop.css" type="text/css" />
+        <!-- custom js file link  -->
+        <script src="js/script.js" defer></script>
+
+    </head>
+    <style>
+        .original-price {
+            text-decoration: line-through;
+            color: grey;
+            font-size: 16px;
+            margin-right: 10px; /* Khoảng cách giữa giá gốc và giá giảm */
+        }
+    </style>
+    <body>
+
+        <!-- header section starts  -->
+
+        <div th:replace="~{/user/fragments :: menu}"></div>
+
+        <!-- header section ends -->
+
+        <!-- header section  -->
+
+        <section class="heading">
+            <h1>our products</h1>
+            <p> <a th:href="@{/user/index}">Home</a> >> Products </p>
+        </section>
+
+        <!-- header section -->
+
+        <!-- prodcuts section starts  -->
+
+        <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+            <div class="container-fluid">
+                <div class="inner-sec-shop px-lg-4 px-3">
+                    <h3 class="tittle-w3layouts my-lg-4 mt-3">New Arrivals for you </h3>
+                    <div class="row">
+                        <!-- product left -->
+                        <div class="side-bar col-lg-3">
+                            <div class="search-hotel">
+                                <h3 class="agileits-sear-head">Search Here..</h3>
+                                <form action="#" method="post">
+                                    <input class="form-control" type="search" name="search" placeholder="Search here..." required="">
+                                    <button class="btn1">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <div class="clearfix"> </div>
+                                </form>
+                            </div>
+                            <!-- price range -->
+                            <div class="left-side">
+                                <h3 class="agileits-sear-head">Filter</h3>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" class="checked">
+                                        <span class="span">New Product</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" class="checked">
+                                        <span class="span">High to low</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" class="checked">
+                                        <span class="span">Low to Hight</span>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                            <!-- //price range -->
+                            <!--preference -->
+
+                            <!-- // preference -->
+                            <!-- discounts -->
+                            <div class="left-side">
+                                <h3 class="agileits-sear-head">Discount</h3>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" class="checked">
+                                        <span class="span">5% or More</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" class="checked">
+                                        <span class="span">10% or More</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" class="checked">
+                                        <span class="span">20% or More</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" class="checked">
+                                        <span class="span">30% or More</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" class="checked">
+                                        <span class="span">50% or More</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" class="checked">
+                                        <span class="span">60% or More</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- //discounts -->
+                            <!-- reviews -->
+                            <div class="customer-rev left-side">
+                                <h3 class="agileits-sear-head">Customer Review</h3>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <span>5.0</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            <span>4.0</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            <span>3.5</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            <span>3.0</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            <span>2.5</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- //reviews -->
+                            <!-- deals -->
+
+                            <!-- //deals -->
+                        </div>
+                        <!-- //product left -->
+                        <!--/product right-->
+                        <div class="left-ads-display col-lg-9">
+                            <div class="wrapper_top_shop">
+
+                                <div class="row">
+                                    <!-- /womens -->
+                                    <div class="col-md-3 product-men women_two shop-gd" th:each="b:${list}">
+                                        <div class="product-googles-info googles" >
+                                            <div class="men-pro-item">
+                                                <div class="men-thumb-item">
+                                                    <img th:src="@{'/admin/images/' + ${b.image}}" class="img-fluid" alt="">
+                                                    <div class="men-cart-pro">
+                                                        <div class="inner-men-cart-pro">
+                                                            <a th:href="@{/user/single/{id}(id=${b.id})}" class="link-product-add-cart">Quick View</a>
+                                                        </div>
+                                                    </div>
+                                                    <span class="product-new-top" th:if="${b.quantity > 1}" th:text="*{b.discount} + '%'" ></span>
+                                                    <span class="product-new-top" th:if="${b.quantity == 0}" style="color: red; font-weight: bold;">Sold Out</span>
+                                                    <span class="product-new-top" th:if="${b.quantity == 1}" style="color: orange; font-weight: bold;">Hot</span>
+
+                                                </div>
+                                                <div class="item-info-product">
+                                                    <div class="info-product-price">
+                                                        <div class="grid_meta">
+                                                            <div class="product_price">
+                                                                <h4>
+                                                                    <a th:text="${b.name}"></a>
+                                                                </h4>
+                                                                <div class="grid-price mt-2">
+                                                                    <span class="money " th:text="'$' + *{b.price-((b.price * b.discount)/100)}"></span>
+                                                                    <span class="original-price " th:text="'$'+ *{b.price} "></span>
+                                                                </div>
+                                                            </div>
+                                                            <ul class="stars">
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="googles single-item hvr-outline-out">
+
+                                                            <input type="hidden" name="cmd" value="_cart">
+                                                            <input type="hidden" name="add" value="1">
+                                                            <input type="hidden" name="googles_item" value="Farenheit">
+                                                            <input type="hidden" name="amount" value="575.00">
+                                                            <button type="button" onclick="addToCart(this)" th:data-id="${b.id}" class="googles-cart pgoogles-cart">
+                                                                <i class="fas fa-cart-plus"></i>
+                                                            </button>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!--//product right-->
+                    </div>
+                    <!--/slide-->
+
+                    <!--//slider-->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- prodcuts section ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- footer section starts  -->
+
+        <section class="footer">
+            <div class="credit"><span></span></div>
+            <div class="box-container">
+
+                <div class="box">
+                    <h3>quick links</h3>
+                    <a href="home.html"> <i class="fas fa-angle-right"></i> home</a>
+                    <a href="products.html"> <i class="fas fa-angle-right"></i> products</a>
+                    <a href="about.html"> <i class="fas fa-angle-right"></i> about</a>
+                    <a href="blogs.html"> <i class="fas fa-angle-right"></i> blogs</a>
+                    <a href="contact.html"> <i class="fas fa-angle-right"></i> contact</a>
+                    <a href="login.html"> <i class="fas fa-angle-right"></i> login</a>
+                    <a href="register.html"> <i class="fas fa-angle-right"></i> register</a>
+                    <a href="cart.html"> <i class="fas fa-angle-right"></i> cart</a>
+                </div>
+
+                <div class="box">
+                    <h3>extra links</h3>
+                    <a href="#"> <i class="fas fa-angle-right"></i> my account </a>
+                    <a href="#"> <i class="fas fa-angle-right"></i> my order </a>
+                    <a href="#"> <i class="fas fa-angle-right"></i> my wishlist </a>
+                    <a href="#"> <i class="fas fa-angle-right"></i> terms of use </a>
+                    <a href="#"> <i class="fas fa-angle-right"></i> privacy policy </a>
+                </div>
+
+                <div class="box">
+                    <h3>follow us</h3>
+                    <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+                    <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+                    <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+                    <a href="#"> <i class="fab fa-pinterest"></i> pinterest </a>
+                    <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+                    <a href="#"> <i class="fab fa-github"></i> github </a>
+                </div>
+
+                <div class="box">
+                    <h3>newsletter</h3>
+                    <p>subscribe for latest updates</p>
+                    <form action="">
+                        <input type="email" placeholder="enter your emal">
+                        <input type="submit" value="subscribe" class="btn">
+                    </form>
+                </div>
+
+            </div>
+
+
+
+        </section>
+
+        <!-- footer section ends -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+    function addToCart(button) {
+        var productId = $(button).data("id");
+
+        $.ajax({
+            url: '/user/AddCart/' + productId,
+            type: 'POST',
+            success: function (response) {
+                if (response.success) {
+                    // Cập nhật lại giỏ hàng trên giao diện người dùng
+                    updateCartUI(response);
+                    alert("AddCart Successfully. Remaining stock: " + response.remainingStock);
+                } else {
+                    // Hiển thị thông báo lỗi
+                    alert(response.message);
+                }
+            },
+            error: function (error) {
+                console.log("Error:", error);
+            }
+        });
+    }
+
+    function updateCartUI(response) {
+        // Cập nhật các thành phần của giỏ hàng dựa trên response từ server
+        $("#totalQuantityCart").text(response.totalQuantity);
+        $("#totalPriceCart").text(response.totalPrice);
+        // Bạn cũng có thể cập nhật danh sách các sản phẩm trong giỏ hàng nếu cần
+    }
+</script>
+
+    </body>
+</html>
